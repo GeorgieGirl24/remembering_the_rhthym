@@ -6,7 +6,7 @@ RSpec.describe Tag, type: :model do
   end
 
   describe 'relationships' do
-    # it { should have_many :photo_tags }
-    # it { should have_many(:photos).through :photo_tags }
+    it { should have_many :photo_tags }
+    it { should have_many(:photos).through :photo_tags }
   end
 end

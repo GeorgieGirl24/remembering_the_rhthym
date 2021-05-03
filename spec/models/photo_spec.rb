@@ -12,5 +12,7 @@ RSpec.describe Photo, type: :model do
   describe 'relationships' do
     it { should belong_to :user }
     it { should belong_to :concert }
+    it { should have_many :photo_tags }
+    it { should have_many(:tags).through :photo_tags }
   end
 end
