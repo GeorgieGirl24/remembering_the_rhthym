@@ -88,3 +88,6 @@ pickle-email-*.html
 
 # Ignore Coverage
 /coverage
+
+# Hide config/creditials
+/credientials.yml.enc
