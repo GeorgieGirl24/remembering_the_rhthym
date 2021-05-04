@@ -12,11 +12,13 @@ class PhotosController < ApplicationController
 
   # GET /photos/new
   def new
+    @concerts = Concert.all
     @photo = Photo.new
   end
 
   # GET /photos/1/edit
   def edit
+    @concerts = Concert.all
   end
 
   # POST /photos or /photos.json
