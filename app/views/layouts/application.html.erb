@@ -10,6 +10,21 @@
   </head>
 
   <body>
+    <nav class = 'topnav'>
+      <%= link_to 'Home', welcome_index_path %>
+      <%= link_to 'Photos', photos_path %>
+      <%= link_to 'Users', users_path %>
+      <%= link_to 'Register', registration_path %>
+      <%= link_to 'Log In', login_path %>
+      <%# <% if current_user %>
+        <%# <%= link_to 'Log Out', logout_path %>
+        <%# <%= link_to 'Profile', profile_path %>
+        <%# <!-- <p>Logged in as <%= current_user.name %>
+      <%# <% end %>
+    </nav>
+    <% flash.each do |type, message| %>
+      <p><%= message %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>
