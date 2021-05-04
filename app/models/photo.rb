@@ -9,9 +9,4 @@ class Photo < ApplicationRecord
   validates :concert_date, presence: true
   validates :loved, inclusion: [true, false]
   validates :liked, inclusion: [true, false]
-
-  def find_concert(concert_id)
-    binding.pry
-    self.find(concert_id).name
-  end
 end
