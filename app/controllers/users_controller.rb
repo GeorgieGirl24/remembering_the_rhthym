@@ -22,11 +22,12 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
-
+binding.pry
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: "User was successfully created." }
-        format.json { render :show, status: :created, location: @user }
+        session[:user_id] = @user.id
+        format.html { redirect_to profile_path, notice: "User was successfully created." }
+        # format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @user.errors, status: :unprocessable_entity }
