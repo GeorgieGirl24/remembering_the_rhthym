@@ -13,18 +13,11 @@
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/photos", type: :request do
-  
-  # Photo. As you add validations to Photo, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
 
   describe "GET /index" do
+    before :each do
+
+    end
     it "renders a successful response" do
       Photo.create! valid_attributes
       get photos_url

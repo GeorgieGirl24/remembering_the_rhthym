@@ -25,8 +25,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: "User was successfully created." }
-        format.json { render :show, status: :created, location: @user }
+        session[:user_id] = @user.id
+        format.html { redirect_to profile_path, notice: "User was successfully created." }
+        # format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -59,7 +60,7 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = current_user
     end
 
     # Only allow a list of trusted parameters through.

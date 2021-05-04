@@ -55,7 +55,7 @@ GEM
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
     bindex (0.8.1)
-    bootsnap (1.7.4)
+    bootsnap (1.7.5)
       msgpack (~> 1.0)
     bootstrap (4.0.0)
       autoprefixer-rails (>= 6.0.3)

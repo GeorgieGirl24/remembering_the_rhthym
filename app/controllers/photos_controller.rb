@@ -12,24 +12,27 @@ class PhotosController < ApplicationController
 
   # GET /photos/new
   def new
+    @concerts = Concert.all
     @photo = Photo.new
   end
 
   # GET /photos/1/edit
   def edit
+    @concerts = Concert.all
   end
 
   # POST /photos or /photos.json
   def create
     @photo = Photo.new(photo_params)
-
+binding.pry
     respond_to do |format|
       if @photo.save
         format.html { redirect_to @photo, notice: "Photo was successfully created." }
-        format.json { render :show, status: :created, location: @photo }
+        # format.json { render :show, status: :created, location: @photo }
       else
+        flash.now[:error] = 'That photo was NOT uploaded. All fields must be filled out. Please try again.'
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @photo.errors, status: :unprocessable_entity }
+        # format.json { render json: @photo.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -64,6 +67,12 @@ class PhotosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def photo_params
-      params.require(:photo).permit(:name, :concert_date, :loved, :liked, :user_id, :concert_id)
+      params.require(:photo).permit(:name, :concert_date, :loved, :liked, :user_id, :concert_id, :concert_photo)
+    end
+
+    def create_photo_params
+      hash = {}
+      hash[:name] = params[:name]
+      hash[:concert_date] = params[:concert_date]
     end
 end

@@ -1,47 +1,52 @@
-<%= form_with(model: photo, local: true) do |form| %>
-  <% if photo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
 
-      <ul>
-      <% photo.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= button_to 'Add Concert', new_concert_path, method: :get %>
+
+<% if !@concerts.nil? %>
+  <%= form_with(model: photo, local: true) do |form| %>
+    <% if photo.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
+
+        <ul>
+        <% photo.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :concert_date %>
+      <%= form.date_select :concert_date %>
+    </div>
+
+    <!-- <div class="field">
+      <%# <%= form.label :loved %> %>
+      <%# <%= form.check_box :loved %> %>
+    <!-- </div> -->
+
+    <div class="field">
+
+      <%= form.text_field :user_id, value: current_user.id, hidden: true %>
+    </div>
+
+    <div class="field">
+      <%= form.label :concert %>
+      <%= form.select :concert_id, @concerts.uniq.map { |concert| [concert.band_name, concert.id] }  %>
+    </div>
+
+    <div class="field">
+      <%= form.label :concert_photo %>
+      <%= form.file_field :concert_photo %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :concert_date %>
-    <%= form.date_select :concert_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :loved %>
-    <%= form.check_box :loved %>
-  </div>
-
-  <div class="field">
-    <%= form.label :liked %>
-    <%= form.check_box :liked %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :concert_id %>
-    <%= form.text_field :concert_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>
