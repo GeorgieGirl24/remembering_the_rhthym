@@ -18,7 +18,6 @@ class SessionsController < ApplicationController
 
   def logout
     session.delete(:user_id)
-    # session.delete(:cart)
     flash[:notice] = 'You have been logged out!'
     redirect_to welcome_index_path
   end
