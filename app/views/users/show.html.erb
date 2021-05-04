@@ -1,3 +1,4 @@
+<h1>Welcome, <%= @user.name %></h1>
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -10,10 +11,10 @@
   <%= @user.email %>
 </p>
 
-<p>
-  <strong>Password digest:</strong>
-  <%= @user.password_digest %>
-</p>
+<!-- <p> -->
+  <!-- <strong>Password digest:</strong> -->
+  <%# <%= @user.password_digest %> 
+<!-- </p> -->
 
 <%= link_to 'Edit', profile_edit_path(@user) %> |
 <%= link_to 'Back', users_path %>
