@@ -123,7 +123,19 @@ RSpec.describe "/tags", type: :request do
     end
 
     it 'cannot make a new tag with a missing field' do
+      file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
 
+      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test')
+      concert = user.concerts.create!(band_name: 'Kaleo', venue: 'Red Rocks', concert_date: '11/06/2019')
+      photo = Photo.create!(name: 'Lyla and Jimmy', concert_date: '11/06/2019', user_id: user.id, concert_id: concert.id, concert_photo: file )
+      file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+      visit "/photos/#{photo.id}/tags/new"
+      fill_in 'Name', with: ''
+      click_button 'Create Tag'
+
+      expect(page).to have_content('')
     end
   end
 
@@ -135,7 +147,7 @@ RSpec.describe "/tags", type: :request do
     end
   end
 
-  xdescribe "POST /create" do
+  describe "POST /create" do
     before :each do
       @valid_attributes = {
         name: "epic"
@@ -145,30 +157,10 @@ RSpec.describe "/tags", type: :request do
       }
     end
 
-    context "with valid parameters" do
-      it "creates a new Tag" do
-        expect {
-          post tags_url, params: { tag: valid_attributes }
-        }.to change(Tag, :count).by(1)
-      end
-
-      it "can create a new Tag" do
-        Tag.create! @valid_attributes
-        tags = Tag.all
-        expect(tags.count).to eq(1)
-        expect(tags.count).to_not eq(2)
-      end
-
-      it "redirects to the created tag" do
-        post tags_url, params: { tag: valid_attributes }
-        expect(response).to redirect_to(tag_url(Tag.last))
-      end
-    end
-
-    context "with invalid parameters" do
+    xcontext "with invalid parameters" do
       it "does not create a new Tag" do
         expect {
-          post tags_url, params: { tag: invalid_attributes }
+          post tags_url, params: { tag: @invalid_attributes }
         }.to change(Tag, :count).by(0)
       end
       it 'cannot create a Tag with a missing name' do
@@ -180,7 +172,7 @@ RSpec.describe "/tags", type: :request do
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post tags_url, params: { tag: invalid_attributes }
+        post tags_url, params: { tag: @invalid_attributes }
         expect(response).to be_successful
       end
     end
