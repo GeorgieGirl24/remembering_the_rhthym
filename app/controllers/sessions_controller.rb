@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
 
   def login
     user = User.find_by(email: params[:email])
+    binding.pry
     if user && user.authenticate(params[:password])
       login_redirect(user)
     else
