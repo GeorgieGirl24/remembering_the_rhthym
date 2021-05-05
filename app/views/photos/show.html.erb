@@ -1,36 +1,43 @@
 <p id="notice"><%= notice %></p>
-
+<h1><%= @photo.name %></h1>
 
 
 <p>
-  <% binding.pry%>
-  <%= image_tag(@photo.concert_photo) %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @photo.name %>
+  <%= image_tag @photo.concert_photo.variant(resize: '200x200')%>
 </p>
 
 <p>
   <strong>Concert date:</strong>
-  <%= @photo.concert_date %>
+  <%= @photo.concert_date.strftime("%A, %d %b %Y") %>
 </p>
 
-<p>
+<!-- <p>
   <strong>Loved:</strong>
-  <%= @photo.loved %>
+  <%# <%= @photo.loved %> %>
 </p>
 
 <p>
   <strong>Liked:</strong>
-  <%= @photo.liked %>
-</p>
+  <%# <%= @photo.liked %> %>
+</p> -->
 
 <p>
   <strong>Concert:</strong>
-  <%= @photo.concert.band_name %>
+  <%= link_to "#{@photo.concert.band_name}", "/concerts/#{@photo.concert.id}" %>
 </p>
+<section class='all-photos-tag'>
+  <strong><%= @photo.name %>'s Tags</strong><br>
+  <% if !@photo.tags.empty? %>
+    <% @photo.tags.each do |tag| %>
+      ---<%= tag.name %>---
+      <%= tag.created_at.strftime("%A, %d %b %Y") %><br>
+    <% end %>
+  <% else %>
+    <h6>There are no tags on this photo, you should add one!</h6>
+  <% end %>
+</section><br>
+
+<%= button_to 'Add tag', "/photos/#{@photo.id}/tags/new", method: :get %>
 
 <%= link_to 'Edit', edit_photo_path(@photo) %> |
 <%= link_to 'Back', photos_path %>

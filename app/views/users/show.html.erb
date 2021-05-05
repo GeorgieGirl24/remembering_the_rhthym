@@ -11,10 +11,39 @@
   <%= @user.email %>
 </p>
 
-<!-- <p> -->
-  <!-- <strong>Password digest:</strong> -->
-  <%# <%= @user.password_digest %>
-<!-- </p> -->
-<%= button_to 'Add Photos', new_photo_path, method: :get %>
+<section class="my-photos">
+  <h3>My Photos</h3>
+  <%= button_to 'Add Photos', new_photo_path, method: :get %>
+  <% if @user.photos.empty? %>
+    <h4>You don't have any photos on file. You should add one!</h4>
+  <% else %>
+    <% @user.photos.each do |photo| %>
+      <strong><%= photo.name %></strong><br>
+      <%= link_to image_tag(photo.concert_photo.variant(resize: '100x100')), "/photos/#{photo.id}", method: :get %><br>
+      <% if !photo.tags.nil? %>
+        <% photo.tags.each do |tag| %>
+          <%= tag.name %><br>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</section>
+
+<section class="my-concerts">
+  <h3>My Concerts</h3>
+  <%= button_to 'Add Concerts', new_concert_path, method: :get %>
+  <%# <% binding.pry %>
+  <% if @user.concerts.empty? %>
+    <h4>You don't have any concerts on file. You should add one!</h4>
+  <% else %>
+    <% @user.concerts.each do |concert| %>
+      <%= concert.band_name %>
+      <%= concert.venue %>
+      <%= concert.concert_date %>
+    <% end %>
+  <% end %>
+</section>
+
+
 <%# <%= link_to 'Edit', profile_edit_path(@user) %>
 <%= link_to 'Back', users_path %>

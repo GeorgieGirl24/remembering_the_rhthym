@@ -12,8 +12,19 @@
 
 <p>
   <strong>Concert date:</strong>
-  <%= @concert.concert_date %>
+  <%= @concert.concert_date.strftime("%A, %d %b %Y") %>
 </p>
 
+
+<section class="all-specific-concert-photos">
+  <% @concert.photos.each do |photo| %>
+    <%= image_tag photo.concert_photo.variant(resize: '200x200') %><br>
+    <%= photo.name %>
+  <% end %>
+</section>
+
+
 <%= link_to 'Edit', edit_concert_path(@concert) %> |
-<%= link_to 'Back', concerts_path %>
+<%= link_to 'Back', concerts_path %> |
+<%= link_to 'Add Photo', new_photo_path %> |
+<%= link_to 'My Photos', profile_path %>

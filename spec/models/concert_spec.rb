@@ -9,5 +9,7 @@ RSpec.describe Concert, type: :model do
 
   describe 'relationships' do
     it { should have_many :photos }
+    it { should have_many :user_concerts }
+    it { should have_many(:users).through(:user_concerts) }
   end
 end

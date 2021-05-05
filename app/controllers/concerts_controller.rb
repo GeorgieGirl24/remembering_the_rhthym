@@ -23,8 +23,12 @@ class ConcertsController < ApplicationController
   def create
     @concert = Concert.new(concert_params)
 
+    if already_exsists?
+      return already_redirect
+    end
     respond_to do |format|
       if @concert.save
+        create_new_user_concert(@concert.id)
         format.html { redirect_to new_photo_path, notice: "Concert was successfully created." }
         format.json { render :show, status: :created, location: @concert }
       else
@@ -65,5 +69,28 @@ class ConcertsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def concert_params
       params.require(:concert).permit(:band_name, :venue, :concert_date)
+    end
+
+    def already_exsists?
+      concerts = Concert.all
+
+      concerts.all? do |concert|
+        concert.band_name == @concert.band_name
+        concert.venue == @concert.venue
+        concert.concert_date == @concert.concert_date
+      end
+    end
+
+    def already_redirect
+      flash[:error] =  'The concert already exsists in the system! Your friends have good taste!'
+      @concert.destroy
+      redirect_to concerts_path
+    end
+
+    def create_new_user_concert(concert_id)
+      user_concert_params = {}
+      user_concert_params[:concert_id] = concert_id
+      user_concert_params[:user_id] = current_user.id
+      UserConcert.create!(user_concert_params)
     end
 end

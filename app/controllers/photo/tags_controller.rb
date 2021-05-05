@@ -1,34 +1,40 @@
-class TagsController < ApplicationController
+class Photo::TagsController < ApplicationController
   before_action :set_tag, only: %i[ show edit update destroy ]
 
+  # GET /tags or /tags.json
   def index
     @tags = Tag.all
   end
 
+  # GET /tags/1 or /tags/1.json
   def show
   end
 
+  # GET /tags/new
   def new
     @tag = Tag.new
-    @photo = Photo.find(params[:photo_id])
   end
 
+  # GET /tags/1/edit
   def edit
   end
 
+  # POST /tags or /tags.json
   def create
-    photo = Photo.find(params[:tag][:photo_id])
-    @tag = photo.tags.new(tag_params)
-    # @tag = Tag.new(tag_params)
+    @tag = Tag.new(tag_params)
+binding.pry
     respond_to do |format|
-      if photo.tags.create(tag_params)
-        format.html { redirect_to "/photos/#{photo.id}", notice: "Tag was successfully created." }
+      if @tag.save
+        format.html { redirect_to @tag, notice: "Tag was successfully created." }
+        format.json { render :show, status: :created, location: @tag }
       else
         format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @tag.errors, status: :unprocessable_entity }
       end
     end
   end
 
+  # PATCH/PUT /tags/1 or /tags/1.json
   def update
     respond_to do |format|
       if @tag.update(tag_params)
@@ -41,6 +47,7 @@ class TagsController < ApplicationController
     end
   end
 
+  # DELETE /tags/1 or /tags/1.json
   def destroy
     @tag.destroy
     respond_to do |format|
@@ -50,10 +57,12 @@ class TagsController < ApplicationController
   end
 
   private
+    # Use callbacks to share common setup or constraints between actions.
     def set_tag
       @tag = Tag.find(params[:id])
     end
 
+    # Only allow a list of trusted parameters through.
     def tag_params
       params.require(:tag).permit(:name)
     end
