@@ -35,6 +35,8 @@ gem 'bcrypt', '~> 3.1.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'figaro'
+gem 'mini_magick'
+gem 'image_processing'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -82,23 +84,3 @@ gem 'jquery-rails'
 gem 'pg'
 gem 'unicorn'
 gem 'unicorn-rails'
-
-group :development do
-  gem 'better_errors'
-  gem 'hub', :require=>nil
-  gem 'rails_apps_pages'
-  gem 'rails_apps_testing'
-  gem 'rails_layout'
-  gem 'spring-commands-rspec'
-end
-
-# group :development, :test do
-#   gem 'factory_bot_rails'
-#   gem 'faker'
-#   gem 'rspec-rails'
-# end
-
-# group :test do
-#   gem 'database_cleaner'
-#   gem 'launchy'
-# end
