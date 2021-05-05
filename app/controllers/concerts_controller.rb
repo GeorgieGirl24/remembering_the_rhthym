@@ -28,6 +28,7 @@ class ConcertsController < ApplicationController
     end
     respond_to do |format|
       if @concert.save
+        create_new_user_concert(@concert.id)
         format.html { redirect_to new_photo_path, notice: "Concert was successfully created." }
         format.json { render :show, status: :created, location: @concert }
       else
@@ -73,7 +74,7 @@ class ConcertsController < ApplicationController
     def already_exsists?
       concerts = Concert.all
 
-      concerts.any? do |concert|
+      concerts.all? do |concert|
         concert.band_name == @concert.band_name
         concert.venue == @concert.venue
         concert.concert_date == @concert.concert_date
@@ -84,5 +85,12 @@ class ConcertsController < ApplicationController
       flash[:error] =  'The concert already exsists in the system! Your friends have good taste!'
       @concert.destroy
       redirect_to concerts_path
+    end
+
+    def create_new_user_concert(concert_id)
+      user_concert_params = {}
+      user_concert_params[:concert_id] = concert_id
+      user_concert_params[:user_id] = current_user.id
+      UserConcert.create!(user_concert_params)
     end
 end
