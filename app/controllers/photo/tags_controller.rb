@@ -1,4 +1,4 @@
-class TagsController < ApplicationController
+class Photo::TagsController < ApplicationController
   before_action :set_tag, only: %i[ show edit update destroy ]
 
   # GET /tags or /tags.json
@@ -13,7 +13,6 @@ class TagsController < ApplicationController
   # GET /tags/new
   def new
     @tag = Tag.new
-    @photo = Photo.find(params[:photo_id])
   end
 
   # GET /tags/1/edit
@@ -22,13 +21,15 @@ class TagsController < ApplicationController
 
   # POST /tags or /tags.json
   def create
-    photo = Photo.find(params[:tag][:photo_id])
-    # @tag = photo.tags.new(tag_params)
+    @tag = Tag.new(tag_params)
+binding.pry
     respond_to do |format|
-      if photo.tags.create(tag_params)
-        format.html { redirect_to "/photos/#{photo.id}", notice: "Tag was successfully created." }
+      if @tag.save
+        format.html { redirect_to @tag, notice: "Tag was successfully created." }
+        format.json { render :show, status: :created, location: @tag }
       else
         format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @tag.errors, status: :unprocessable_entity }
       end
     end
   end

@@ -7,13 +7,8 @@
 </p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @photo.name %>
-</p>
-
-<p>
   <strong>Concert date:</strong>
-  <%= @photo.concert_date %>
+  <%= @photo.concert_date.strftime("%A, %d %b %Y") %>
 </p>
 
 <!-- <p>
@@ -30,6 +25,19 @@
   <strong>Concert:</strong>
   <%= link_to "#{@photo.concert.band_name}", "/concerts/#{@photo.concert.id}" %>
 </p>
+<section class='all-photos-tag'>
+  <strong><%= @photo.name %>'s Tags</strong><br>
+  <% if !@photo.tags.empty? %>
+    <% @photo.tags.each do |tag| %>
+      ---<%= tag.name %>---
+      <%= tag.created_at.strftime("%A, %d %b %Y") %><br>
+    <% end %>
+  <% else %>
+    <h6>There are no tags on this photo, you should add one!</h6>
+  <% end %>
+</section><br>
+
+<%= button_to 'Add tag', "/photos/#{@photo.id}/tags/new", method: :get %>
 
 <%= link_to 'Edit', edit_photo_path(@photo) %> |
 <%= link_to 'Back', photos_path %>

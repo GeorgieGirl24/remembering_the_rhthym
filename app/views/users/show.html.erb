@@ -18,8 +18,13 @@
     <h4>You don't have any photos on file. You should add one!</h4>
   <% else %>
     <% @user.photos.each do |photo| %>
-      <%= link_to image_tag(photo.concert_photo.variant(resize: '100x100')), "/photos/#{photo.id}", method: :get %>
-      <%= photo.name %>
+      <strong><%= photo.name %></strong><br>
+      <%= link_to image_tag(photo.concert_photo.variant(resize: '100x100')), "/photos/#{photo.id}", method: :get %><br>
+      <% if !photo.tags.nil? %>
+        <% photo.tags.each do |tag| %>
+          <%= tag.name %><br>
+        <% end %>
+      <% end %>
     <% end %>
   <% end %>
 </section>
