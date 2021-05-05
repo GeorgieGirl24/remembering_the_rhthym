@@ -91,3 +91,6 @@ pickle-email-*.html
 
 # Hide config/creditials
 /credientials.yml.enc
+
+# Ignore storage updates
+/storage
