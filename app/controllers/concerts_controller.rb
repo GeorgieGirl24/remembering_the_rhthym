@@ -23,6 +23,9 @@ class ConcertsController < ApplicationController
   def create
     @concert = Concert.new(concert_params)
 
+    if already_exsists?
+      return already_redirect
+    end
     respond_to do |format|
       if @concert.save
         format.html { redirect_to new_photo_path, notice: "Concert was successfully created." }
@@ -65,5 +68,21 @@ class ConcertsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def concert_params
       params.require(:concert).permit(:band_name, :venue, :concert_date)
+    end
+
+    def already_exsists?
+      concerts = Concert.all
+
+      concerts.any? do |concert|
+        concert.band_name == @concert.band_name
+        concert.venue == @concert.venue
+        concert.concert_date == @concert.concert_date
+      end
+    end
+
+    def already_redirect
+      flash[:error] =  'The concert already exsists in the system! Your friends have good taste!'
+      @concert.destroy
+      redirect_to concerts_path
     end
 end
