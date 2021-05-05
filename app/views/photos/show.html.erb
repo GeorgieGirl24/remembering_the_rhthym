@@ -1,10 +1,9 @@
 <p id="notice"><%= notice %></p>
-
+<h1><%= @photo.name %></h1>
 
 
 <p>
-  <% binding.pry%>
-  <%= image_tag(@photo.concert_photo) %>
+  <%= image_tag @photo.concert_photo.variant(resize: '200x200')%>
 </p>
 
 <p>
@@ -17,19 +16,19 @@
   <%= @photo.concert_date %>
 </p>
 
-<p>
+<!-- <p>
   <strong>Loved:</strong>
-  <%= @photo.loved %>
+  <%# <%= @photo.loved %> %>
 </p>
 
 <p>
   <strong>Liked:</strong>
-  <%= @photo.liked %>
-</p>
+  <%# <%= @photo.liked %> %>
+</p> -->
 
 <p>
   <strong>Concert:</strong>
-  <%= @photo.concert.band_name %>
+  <%= link_to "#{@photo.concert.band_name}", "/concerts/#{@photo.concert.id}" %>
 </p>
 
 <%= link_to 'Edit', edit_photo_path(@photo) %> |
