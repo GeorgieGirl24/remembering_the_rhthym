@@ -32,7 +32,7 @@ To do this:
 <img width="765" alt="Screen Shot 2021-05-06 at 10 01 25 AM" src="https://user-images.githubusercontent.com/62966396/117329597-076bf900-ae52-11eb-924d-d91928d44662.png">
 
 
-## Highlights To Remembering The Rhthym
+## Highlights Of Remembering The Rhthym
 
 
 ### Welcome Page (logged in User)
