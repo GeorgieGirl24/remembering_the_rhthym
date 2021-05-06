@@ -3,23 +3,13 @@
 
 
 <p>
-  <%= image_tag @photo.concert_photo.variant(resize: '200x200')%>
+  <%= image_tag @photo.concert_photo.variant(resize: '400x400')%>
 </p>
 
 <p>
   <strong>Concert date:</strong>
   <%= @photo.concert_date.strftime("%A, %d %b %Y") %>
 </p>
-
-<!-- <p>
-  <strong>Loved:</strong>
-  <%# <%= @photo.loved %> %>
-</p>
-
-<p>
-  <strong>Liked:</strong>
-  <%# <%= @photo.liked %> %>
-</p> -->
 
 <p>
   <strong>Concert:</strong>
