@@ -7,6 +7,5 @@ class Photo < ApplicationRecord
 
   validates :name, presence: true
   validates :concert_date, presence: true
-  validates :loved, inclusion: [true, false]
-  validates :liked, inclusion: [true, false]
+  
 end
