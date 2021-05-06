@@ -16,14 +16,10 @@
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
-        <td><%= link_to 'Show', user %></td>
-        <%# <!-- <td><%= link_to 'Edit', profile_edit_path(user) %>
-        <%# <!-- <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
-      </tr>
+        <td><%= link_to 'Show', "/profile/#{user.id}" %></td>
+        </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%# <%= link_to 'New User', registration_path %>  

@@ -32,7 +32,7 @@
 <section class="my-concerts">
   <h3>My Concerts</h3>
   <%= button_to 'Add Concerts', new_concert_path, method: :get %>
-  <%# <% binding.pry %>
+
   <% if @user.concerts.empty? %>
     <h4>You don't have any concerts on file. You should add one!</h4>
   <% else %>
@@ -45,5 +45,5 @@
 </section>
 
 
-<%# <%= link_to 'Edit', profile_edit_path(@user) %>
+<%= link_to 'Update Profile', profile_edit_path %>
 <%= link_to 'Back', users_path %>
