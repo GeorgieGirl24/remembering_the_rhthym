@@ -58,7 +58,9 @@ RSpec.describe 'Site Navigation' do
   describe 'As a User' do
     describe 'I see a nav bar where I can link to' do
       before :each do
-        @user = User.create(name: 'Megan', email: 'megan@example.com', password_digest: 'securepassword')
+        file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
+
+        @user = User.create(name: 'Megan', email: 'megan@example.com', password_digest: 'securepassword', avatar: file)
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
       end
       it 'the welcome page' do
@@ -116,7 +118,7 @@ RSpec.describe 'Site Navigation' do
         visit welcome_index_path
 
         within 'nav' do
-          expect(page).to have_content("Logged in as #{@user.name}")
+          expect(page).to have_content("Logged in as" )
         end
       end
     end

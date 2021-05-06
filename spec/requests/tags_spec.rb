@@ -42,7 +42,7 @@ RSpec.describe "/tags", type: :request do
     it "can create a to a form to make a new tag" do
       file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
 
-      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test')
+      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test', avatar: file)
       concert = user.concerts.create!(band_name: 'Kaleo', venue: 'Red Rocks', concert_date: '11/06/2019')
       photo = Photo.create!(name: 'Lyla and Jimmy', concert_date: '11/06/2019', user_id: user.id, concert_id: concert.id, concert_photo: file )
       file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
@@ -58,7 +58,7 @@ RSpec.describe "/tags", type: :request do
     it 'can redirect after creating a new Tag' do
       file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
 
-      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test')
+      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test', avatar: file)
       concert = user.concerts.create!(band_name: 'Kaleo', venue: 'Red Rocks', concert_date: '11/06/2019')
       photo = Photo.create!(name: 'Lyla and Jimmy', concert_date: '11/06/2019', user_id: user.id, concert_id: concert.id, concert_photo: file )
       file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
@@ -74,7 +74,7 @@ RSpec.describe "/tags", type: :request do
     it 'can see the new tag on the Photo Show Page' do
       file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
 
-      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test')
+      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test', avatar: file)
       concert = user.concerts.create!(band_name: 'Kaleo', venue: 'Red Rocks', concert_date: '11/06/2019')
       photo = Photo.create!(name: 'Lyla and Jimmy', concert_date: '11/06/2019', user_id: user.id, concert_id: concert.id, concert_photo: file )
       file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
@@ -91,7 +91,7 @@ RSpec.describe "/tags", type: :request do
     it 'can see a prompt if there are no tags, to add one!' do
       file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
 
-      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test')
+      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test', avatar: file)
       concert = user.concerts.create!(band_name: 'Kaleo', venue: 'Red Rocks', concert_date: '11/06/2019')
       photo = Photo.create!(name: 'Lyla and Jimmy', concert_date: '11/06/2019', user_id: user.id, concert_id: concert.id, concert_photo: file )
       file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
@@ -105,7 +105,7 @@ RSpec.describe "/tags", type: :request do
     it 'can see the new tag on the Profile/Stage Page' do
       file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
 
-      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test')
+      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test', avatar: file)
       concert = user.concerts.create!(band_name: 'Kaleo', venue: 'Red Rocks', concert_date: '11/06/2019')
       photo = Photo.create!(name: 'Lyla and Jimmy', concert_date: '11/06/2019', user_id: user.id, concert_id: concert.id, concert_photo: file )
       file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
@@ -125,7 +125,7 @@ RSpec.describe "/tags", type: :request do
     it 'cannot make a new tag with a missing field' do
       file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
 
-      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test')
+      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test', avatar: file)
       concert = user.concerts.create!(band_name: 'Kaleo', venue: 'Red Rocks', concert_date: '11/06/2019')
       photo = Photo.create!(name: 'Lyla and Jimmy', concert_date: '11/06/2019', user_id: user.id, concert_id: concert.id, concert_photo: file )
       file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
