@@ -19,7 +19,7 @@
 <section class="all-specific-concert-photos">
   <% @concert.photos.each do |photo| %>
     <%= image_tag photo.concert_photo.variant(resize: '200x200') %><br>
-    <%= photo.name %>
+    <%= photo.name %><br>
   <% end %>
 </section>
 
