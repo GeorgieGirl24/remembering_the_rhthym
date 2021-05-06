@@ -4,8 +4,8 @@ RSpec.describe Photo, type: :model do
   describe 'validations' do
     it { should validate_presence_of :name }
     it { should validate_presence_of :concert_date }
-    # it { should validate_inclusion_of(:loved).in_array([true, false]) }
-    # it { should validate_inclusion_of(:liked).in_array([true, false]) }
+    it { should validate_inclusion_of(:loved).in_array([true, false]) }
+    it { should validate_inclusion_of(:liked).in_array([true, false]) }
   end
 
 

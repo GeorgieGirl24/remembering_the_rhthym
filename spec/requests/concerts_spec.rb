@@ -68,8 +68,10 @@ RSpec.describe "/concerts", type: :request do
     end
 
     it "a concert can be edited" do
+      file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
+
       concert = Concert.create! @valid_attributes
-      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test')
+      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test', avatar: file)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       visit concerts_path
@@ -102,9 +104,9 @@ RSpec.describe "/concerts", type: :request do
     end
 
     it "a concert can be added to your dashboard" do
-      get new_concert_url
-      expect(response).to be_successful
-      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test')
+      file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
+
+      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test', avatar: file)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       visit welcome_index_path
@@ -122,7 +124,9 @@ RSpec.describe "/concerts", type: :request do
     end
 
     it "see all the concerts and a button to add a new one" do
-      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test')
+      file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
+
+      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test', avatar: file)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       visit welcome_index_path
@@ -138,7 +142,9 @@ RSpec.describe "/concerts", type: :request do
     end
 
     it "redirects to the created concert" do
-      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test')
+      file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
+
+      user = User.create(name: 'Lyla', email: 'lyla@example.com', password_digest: 'test', avatar: file)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       visit welcome_index_path
@@ -158,37 +164,21 @@ RSpec.describe "/concerts", type: :request do
     end
   end
 
-  # describe "PATCH /update" do
-  #   context "with valid parameters" do
-  #     let(:new_attributes) {
-  #       skip("Add a hash of attributes valid for your model")
-  #     }
-  #
-  #     it "updates the requested concert" do
-  #       concert = Concert.create! @valid_attributes
-  #       patch concert_url(concert), params: { concert: new_attributes }
-  #       concert.reload
-  #       skip("Add assertions for updated state")
-  #     end
-  #
-  #     it "redirects to the concert" do
-  #       concert = Concert.create! @valid_attributes
-  #       patch concert_url(concert), params: { concert: new_attributes }
-  #       concert.reload
-  #       expect(response).to redirect_to(concert_url(concert))
-  #     end
-  #   end
-  #
-  #   context "with invalid parameters" do
-  #     it "renders a successful response (i.e. to display the 'edit' template)" do
-  #       concert = Concert.create! @valid_attributes
-  #       patch concert_url(concert), params: { concert: @invalid_attributes }
-  #       expect(response).to be_successful
-  #     end
-  #   end
-  # end
-  #
-  xdescribe "DELETE /destroy" do
+  describe "DELETE /destroy" do
+    before :each do
+      @valid_attributes = {
+        band_name: 'Jon & Roy',
+        venue: 'Red Rocks Amphatheater',
+        concert_date: '11/06/2019'
+      }
+
+      @invalid_attributes = {
+        band_name: 'Jon & Roy',
+        venue: 'Red Rocks Amphatheater',
+        concert_date: ''
+      }
+    end
+
     it "destroys the requested concert" do
       concert = Concert.create! @valid_attributes
       expect {
