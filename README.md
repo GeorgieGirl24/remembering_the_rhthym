@@ -3,6 +3,7 @@
   - [How to Install Remembering The Rhthym](#how-to-install-remembering-the-rhthym)
   - [Highlights of Remembering The Rhthym](#highlights-of-remembering-the-rhthym)
   - [Future Iterations](#future-iterations)
+  - [Testing](#testing)
   - [Contact](#contact)
 
 ## What it does 
@@ -20,16 +21,19 @@ To do this:
 
 1. Clone this repo to your local computer. There is a button green button in the upper rightside of this repo that, if you click it will allow you to put Remembering The Rhthym's code in your clipboard.
 2. This application was written in Ruby and thus you will need some Rails commands. (I'll give them to you, don't worry)
-3. Open up your terminal and paste this code into CLI (command line interface). If you are using a Mac, use the short cut `command + spacebar`. This will give you the `Spotlight Search` and you can start typing `terminal` and that will get you to the terminal even faster!
-4. Open up another window in your terminal (I use the `command + t` shortcut) and spin up a rails server. You can do that by simply typing `rails s` and hitting enter.
+3. Open up your terminal. Type `git clone ` and then paste this code into CLI (command line interface). If you are using a Mac, use the short cut `command + spacebar`. This will give you the `Spotlight Search` and you can start typing `terminal` and that will get you to the terminal even faster!
+4. Then type `cd remembering_the_rhthym` to get into the directory.
+5. Type `bundle install` to make sure that the gems are all installed locally
+6. Type `rake db:{create,migrate}` to create the database locally
+7. Type `bundle exec figaro install` 
+8. Open up another window in your terminal (I use the `command + t` shortcut) and spin up a rails server. You can do that by simply typing `rails s` and hitting enter.
 <img width="657" alt="Screen Shot 2021-05-06 at 9 54 14 AM" src="https://user-images.githubusercontent.com/62966396/117328664-156d4a00-ae51-11eb-8b4e-8665c25311a6.png">
 
-5. This by default will be running on port :3000. 
+9. This by default will be running on port :3000. 
 
-6. Once your rails server is running, open up a new tab in your web browser. I use Chrome, but Safari or anyother web browser will work. Type in `localhost:3000` and viola you should be taken to the homepage of Remembering The Rhthym!
+10. Once your rails server is running, open up a new tab in your web browser. I use Chrome, but Safari or anyother web browser will work. Type in `localhost:3000` and viola you should be taken to the homepage of Remembering The Rhthym!
 
-7. Now you can sign-in, upload pictures and remember all the rhthyms that made/make you sway!!!
-<img width="765" alt="Screen Shot 2021-05-06 at 10 01 25 AM" src="https://user-images.githubusercontent.com/62966396/117329597-076bf900-ae52-11eb-924d-d91928d44662.png">
+11. Now you can sign-in, upload pictures and remember all the rhthyms that made/make you sway!!!
 
 
 ## Highlights Of Remembering The Rhthym
@@ -46,6 +50,10 @@ To do this:
 ### Photos Page
 
 <img width="929" alt="Screen Shot 2021-05-06 at 10 42 56 AM" src="https://user-images.githubusercontent.com/62966396/117334935-d393d200-ae57-11eb-9f86-be60de13c1be.png">
+
+### Photos Page (with avatars of Users, instead of their names)
+
+<img width="957" alt="Screen Shot 2021-05-06 at 11 35 03 AM" src="https://user-images.githubusercontent.com/62966396/117341233-1b6a2780-ae5f-11eb-8739-6a74140f3011.png">
 
 ### Concerts Page
 
@@ -79,6 +87,10 @@ To do this:
 
 <img width="473" alt="Screen Shot 2021-05-06 at 10 57 52 AM" src="https://user-images.githubusercontent.com/62966396/117336872-ea3b2880-ae59-11eb-9f36-2056ccfe27d2.png">
 
+### Edit Profile (added ability to add avatar)
+
+<img width="396" alt="Screen Shot 2021-05-06 at 11 33 47 AM" src="https://user-images.githubusercontent.com/62966396/117341091-ef4ea680-ae5e-11eb-9ade-85ffe8b8f3dc.png">
+
 ## Future Iterations
 
 There are many features that in the futures that we would love to see done to improve the User experience. 
@@ -87,6 +99,10 @@ There are many features that in the futures that we would love to see done to im
   * Front End styling
   * More robust edge-case testing
   * Deploy to Heroku
+
+## Testing
+  * Currently all tests are passing
+  * There are skipped tests, because the Composer that created the base app gave some that I didn't need and I wanted to have the ability to utilize these when the time came
 
 ## Contact
 <img src="https://avatars.githubusercontent.com/u/62966396?v=4" alt="George Soderholm"
