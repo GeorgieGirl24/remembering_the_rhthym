@@ -13,26 +13,6 @@ RSpec.describe 'Site Navigation' do
         expect(current_path).to eq(welcome_index_path)
       end
 
-      # it 'all photos' do
-      #   visit welcome_index_path
-      #
-      #   within 'nav' do
-      #     click_link 'Photos'
-      #   end
-      #
-      #   expect(current_path).to eq(photos_path)
-      # end
-      #
-      # it 'all users' do
-      #   visit users_path
-      #
-      #   within 'nav' do
-      #     click_link 'Users'
-      #   end
-      #
-      #   expect(current_path).to eq(users_path)
-      # end
-
       it 'the login page' do
         visit welcome_index_path
 
