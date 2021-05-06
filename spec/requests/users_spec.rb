@@ -98,6 +98,37 @@ RSpec.describe "/users", type: :request do
       expect(page).to have_content('Concert photo')
       expect(page).to have_button('Create Photo')
     end
+
+    it 'can upload a photo that will serve as the User avatar' do
+      user = User.create! @valid_attributes
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      visit welcome_index_path
+      click_link 'Profile'
+
+      expect(page).to have_link 'Update Profile'
+      click_link 'Update Profile'
+      expect(current_path).to eq(profile_edit_path)
+
+      expect(page).to have_content('Add avatar to your profile')
+    end
+
+    it 'can upload a photo that will serve as the User avatar and shows up on navbar' do
+      user = User.create! @valid_attributes
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      visit welcome_index_path
+      click_link 'Profile'
+
+      expect(page).to have_link 'Update Profile'
+      click_link 'Update Profile'
+      expect(current_path).to eq(profile_edit_path)
+
+      expect(page).to have_content('Add avatar to your profile')
+
+      file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
+      select file, from: 'Choose File'
+
+      expect(page).to have_content("#{user.name} successfully updated your profile")
+    end
   end
 
   # describe "GET /edit" do
